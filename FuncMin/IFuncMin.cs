@@ -9,12 +9,12 @@ namespace FuncMin
     public delegate double[] FuncGrad(double[] x);
     public delegate double[,] FuncHess(double[] x);
 
-    interface IFuncMin
+    public interface IFuncMin
     {
         double[] FuncMin(double[] x0, Func func, FuncGrad funcGrad, FuncHess funcHess); 
     }
 
-    class FuncMinFactory
+    public class FuncMinFactory
     {
         public static IFuncMin GetFuncMin(string method)
         {
