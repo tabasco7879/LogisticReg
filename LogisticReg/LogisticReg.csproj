@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LogReg</RootNamespace>
-    <AssemblyName>LogReg</AssemblyName>
+    <AssemblyName>LogisticReg</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -46,9 +46,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataItem.cs" />
-    <Compile Include="LogRegModel.cs" />
+    <Compile Include="LogisticReg.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FuncMin\FuncMin.csproj">
+      <Project>{5EF9BD94-7A4A-4B8F-9D00-A12FA0CFEB1B}</Project>
+      <Name>FuncMin</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

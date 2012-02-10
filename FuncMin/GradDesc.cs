@@ -18,7 +18,7 @@ namespace FuncMin
             while (e > Epsilon && step < MaxIter)
             {
                 step++;
-                double[] p = FuncMinUtil.Multiply(x0, -1);
+                double[] p = FuncMinUtil.Multiply(grad, -1);
                 double alpha = 1;
                 while (!FuncMinUtil.SuffDesc(x0, p, alpha, func, grad))
                 {
