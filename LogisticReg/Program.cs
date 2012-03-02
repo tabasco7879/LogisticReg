@@ -13,7 +13,7 @@ namespace LogisticReg
     {
         static void Main(string[] args)
         {
-            Regression();
+            Regression(116);
         }
 
         static void Test()
@@ -37,15 +37,34 @@ namespace LogisticReg
 
         static void Regression()
         {
-            //List<DataItem> training = LoadData(0, "training", 50);
-            List<DataItem> training = LoadData(0, "crsvalid", 50);
-            LogisticReg regression = new LogisticReg(50, 0, 1);
+            string[] classLabels = Directory.GetFiles(@"C:\Users\chentao\Desktop\Workspace1\Github\DocModel\DocumentModel\bin\Debug\training_data");
+            for (int i = 0; i < classLabels.Length; i++)
+            {
+                int classKey = int.Parse(
+                    classLabels[i].Substring(classLabels[i].LastIndexOf('_') + 1)
+                    );
+
+                List<DataItem> training = LoadData(classKey, "training", 50);
+                LogisticReg regression = new LogisticReg(50, classKey, 1);
+                regression.Training(training);
+                List<DataItem> crsvalid = LoadData(0, "crsvalid", 50);
+                double precision, recall;
+                regression.Testing(training, out precision, out recall);
+                regression.Testing(crsvalid, out precision, out recall);
+                Console.WriteLine("class: {0}, precision: {1}, recall: {2}", classKey, precision, recall);
+            }
+        }
+
+        static void Regression(int classKey)
+        {            
+            List<DataItem> training = LoadData(classKey, "training", 50);
+            LogisticReg regression = new LogisticReg(50, classKey, 1);
             regression.Training(training);
-            List<DataItem> crsvalid = LoadData(0, "training", 50);
+            List<DataItem> crsvalid = LoadData(0, "crsvalid", 50);
             double precision, recall;
             regression.Testing(training, out precision, out recall);
             regression.Testing(crsvalid, out precision, out recall);
-            Console.WriteLine("precision: {0}, recall: {1}", precision, recall); 
+            Console.WriteLine("class: {0}, precision: {1}, recall: {2}", classKey, precision, recall);            
         }
 
         static List<DataItem> LoadData(int classLabel, string type, int numTopics)
